@@ -1,4 +1,4 @@
-import React,{ useCallback} from 'react';
+import React,{ useCallback,useEffect} from 'react';
 import { Task } from '../';
 
 type Props = {
@@ -21,22 +21,17 @@ export const TaskList: React.FC<Props> = (props) => {
   },[tasks])
 
   return (
-    <>
-      <ul>
-        {tasks.map((task, index) => {
-          <li key={`to-do-${index}`}>
-            {task.isDone 
-              ? <s>{task.label}</s> 
-              : task.label
-            }
-            <input 
-              onChange={(e) => handleCheckBox(e, index)}
-              type = "type"
-              checked={task.isDone}
-            />
-          </li>
-        })}
-      </ul>
-    </>
+    <ul>
+      {tasks.map((task, index) => (
+        <li key={`todo-${index}`}>
+          {task.isDone ? <s>{task.label}</s> : task.label}
+          <input
+            onChange={(e) => handleCheckBox(e, index)}
+            type="checkbox"
+            checked={task.isDone}
+          />
+        </li>
+      ))}
+    </ul>
   );
 };
